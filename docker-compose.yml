@@ -3,13 +3,33 @@ services:
   dj-perl:
     build:
       context: .
-    image: theraccoonbear/dj-perl
+    image: 'theraccoonbear/dj-perl'
+    environment:
+      - DBNAME=double-jeopardy
+      - DBUSER=postgres
+      - DBPASS=qwerty1234
+      - DBHOST=postgres
+      - DBPORT=5432
+      - PGUSER=postgres
+      - PGPASS=qwerty1234
+      - NEWRELIC_APP_NAME=flad-local
     hostname: dj-perl
     container_name: 'dj-perl'
-
     volumes:
-      - './root:/opt/src'
+      - './:/opt/src'
+    networks:
+      - app
+    links:
+      - db-postgres
+    entrypoint: ./build/wait-for-it.sh
 
+  db-postgres:
+    environment:
+      - POSTGRES_PASSWORD=qwerty1234
+    ports:
+      - '5432:5432'
+    image: 'postgres:latest'
+    container_name: 'db-postgres'
     networks:
       - app
 
