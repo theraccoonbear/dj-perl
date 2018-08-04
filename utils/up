@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+docker-compose -f docker-compose.yml up -d;
+
+NAME=$(grep hostname docker-compose.yml | sed 's/.*:\s*//')
+
+docker logs -f $NAME;

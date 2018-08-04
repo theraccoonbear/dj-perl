@@ -1,0 +1,20 @@
+version: '2'
+services:
+  dj-perl:
+    build:
+      context: .
+    image: theraccoonbear/dj-perl
+    hostname: dj-perl
+    container_name: 'dj-perl'
+
+    volumes:
+      - './root:/opt/src'
+
+    networks:
+      - app
+
+networks:
+  default:
+    driver: bridge
+  app:
+    driver: bridge

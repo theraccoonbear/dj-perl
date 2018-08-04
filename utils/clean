@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+./utils/destroy
+
+docker-compose build --no-cache && \
+	./utils/up && \
+	./utils/logwatch

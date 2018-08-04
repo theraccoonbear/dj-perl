@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+NAME=$(grep hostname docker-compose.yml | sed 's/.*:\s*//')
+
+docker logs -f $NAME
