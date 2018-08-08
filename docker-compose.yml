@@ -21,7 +21,7 @@ services:
       - app
     links:
       - db-postgres
-    entrypoint: ./build/wait-for-it.sh
+    entrypoint: /opt/src/build/wait-for-it.sh
 
   db-postgres:
     environment:

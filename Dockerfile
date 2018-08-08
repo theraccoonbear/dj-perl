@@ -4,6 +4,10 @@ ADD ./ /opt/src
 WORKDIR /opt/src
 
 RUN apk update && \
-	apk add bash perl perl-io-socket-ssl perl-net-ssleay netcat-openbsd
+	apk add curl bash perl perl-io-socket-ssl perl-net-ssleay netcat-openbsd \
+		build-base gcc abuild binutils binutils-doc gcc-doc \
+		yaml-dev perl-dev
 
-CMD while sleep 3600; do :; done
+#RUN ./build/setup-perl-env.sh
+
+CMD while sleep 3600; do: echo '.'; done
