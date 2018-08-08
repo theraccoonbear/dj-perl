@@ -5,6 +5,7 @@ services:
       context: .
     image: 'theraccoonbear/dj-perl'
     environment:
+      - APP_NAME=hanglight
       - DBNAME=double-jeopardy
       - DBUSER=postgres
       - DBPASS=qwerty1234

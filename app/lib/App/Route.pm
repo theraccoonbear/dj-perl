@@ -6,7 +6,7 @@ use warnings;
 use FindBin;
 use Cwd qw(abs_path);
 
-use Dancer2 appname => 'hanglight';
+use Dancer2 appname => $ENV{APP_NAME};
 #use App::Util qw(api_error api_resp);
 use Data::Printer;
 # use App::Model::User;

@@ -10,9 +10,7 @@ RUN apk update && \
 
 RUN ./build/setup-perl-env.sh
 
-RUN ./build/install-ssl.sh
-
-RUN apk del build-base gcc abuild binutils binutils-doc gcc-doc
+#RUN apk del build-base gcc abuild binutils binutils-doc gcc-doc
 
 EXPOSE 5000
 

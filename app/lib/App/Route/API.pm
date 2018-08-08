@@ -7,7 +7,7 @@ use Cwd qw(abs_path);
 #use lib abs_path("$FindBin::Bin/../../../modules/lib/perl5");
 
 
-use Dancer2 appname => 'hanglight';
+use Dancer2 appname => $ENV{APP_NAME};
 use File::Slurp;
 use Data::Printer;
 use Data::Dumper;
