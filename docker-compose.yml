@@ -12,24 +12,25 @@ services:
       - DBPORT=5432
       - PGUSER=postgres
       - PGPASS=qwerty1234
-      - NEWRELIC_APP_NAME=flad-local
     hostname: dj-perl
     container_name: 'dj-perl'
+    ports:
+      - '5000:5000'
     volumes:
       - './:/opt/src'
     networks:
       - app
     links:
-      - db-postgres
-    entrypoint: /opt/src/build/wait-for-it.sh
+      - dj-postgres
+    entrypoint: /opt/src/build/wait-and-start.sh
 
-  db-postgres:
+  dj-postgres:
     environment:
       - POSTGRES_PASSWORD=qwerty1234
     ports:
       - '5432:5432'
     image: 'postgres:latest'
-    container_name: 'db-postgres'
+    container_name: 'dj-postgres'
     networks:
       - app
 
