@@ -6,7 +6,7 @@ services:
     image: 'theraccoonbear/dj-perl'
     environment:
       - APP_NAME=hanglight
-      - DBNAME=double-jeopardy
+      - DBNAME=double_jeopardy
       - DBUSER=postgres
       - DBPASS=qwerty1234
       - DBHOST=postgres
@@ -27,11 +27,16 @@ services:
 
   dj-postgres:
     environment:
+      - POSTGRES_DB=double_jeopardy
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=qwerty1234
     ports:
       - '5432:5432'
     image: 'postgres:latest'
     container_name: 'dj-postgres'
+    volumes:
+      - './build/pg/postgres-init:/docker-entrypoint-initdb.d'
+      - './build/pg/scripts:/sql-scripts'
     networks:
       - app
 
