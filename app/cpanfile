@@ -35,3 +35,4 @@ requires 'Crypt::Bcrypt::Easy', '>= 0.0001';
 requires 'Crypt::Digest::SHA256', '>= 0.0001';
 requires 'Sys::RunAlone', '>= 0.0001';
 requires 'DBIx::Class', '>= 0.0001';
+requires 'DBD::Pg', '>= 0.0001';

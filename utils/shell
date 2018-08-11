@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-NAME=$(grep hostname docker-compose.yml | sed 's/.*:\s*//')
+NAME=$(grep hostname docker-compose.yml | head -1 | sed 's/.*:\s*//')
 
 docker exec -it $NAME /bin/sh

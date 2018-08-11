@@ -1,4 +1,4 @@
-package Schema::Result::User;
+package App::Schema::Result::User;
 
 use warnings;
 use strict;
