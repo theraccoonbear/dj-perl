@@ -12,6 +12,7 @@ use Data::Printer;
 # use App::Model::User;
 # use App::Model::Follower;
 use Dancer2::Plugin::Flash;
+use Dancer2::Plugin::DBIC;
 our $VERSION = 0.1;
 
 # my $users = App::Model::User->instance();
@@ -19,9 +20,12 @@ our $VERSION = 0.1;
 
 prefix undef;
 
-# get q{/} => sub {
-# 	send_file 'index.html';
-# };
+get q{/} => sub {
+	my $users = schema->resultset('User')->find({ 'username' => 'hanglighter' });
+	p($users);
+};
+
+use App::Route::API;
 
 # get q{/} => sub {
 # 	# my $flw = $followers->followed_by(session 'username');
@@ -58,7 +62,7 @@ prefix undef;
 any qr{.*} => sub {
 	return send_file 'index.html';
 
-  status 'not_found';
+	status 'not_found';
 
 	debug "Something went wrong: " . request->path_info;
 
@@ -70,7 +74,7 @@ any qr{.*} => sub {
 		$params->{id} = $+{id};
 	}
 
-  template 'err/404', $params;
+	template 'err/404', $params;
 };
 
 1;

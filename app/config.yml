@@ -54,6 +54,19 @@ charset: "UTF-8"
 #session: MongoDB
 template: "template_toolkit"
 
+# "dbi:Pg:dbname=$ENV{APP_DB_NAME};host=$ENV{APP_DB_HOST}",
+#   $ENV{APP_DB_USER},
+#   $ENV{APP_DB_PASSWORD},
+
+plugins:
+  DBIC:
+    default:
+      dsn: dbi:Pg:dbname=hanglight;host=dj-postgres
+      user: hanglight
+      # @todo this has really got to be pulled from .env or something else, but this will work for local dev
+      password: h4ngl!gh7
+      schema_class: App::Schema
+
 engines:
   # session:
   #   MongoDB:
