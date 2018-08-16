@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::PostgreSQL
--- Created on Tue Aug 14 03:01:08 2018
+-- Created on Thu Aug 16 03:11:09 2018
 -- 
 --
 -- Table: users
