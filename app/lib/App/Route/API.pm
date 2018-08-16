@@ -25,18 +25,48 @@ use Dancer2::Plugin::REST;
 
 prepare_serializer_for_format;
 
-get '/api/v1/user/:username.:format' => sub {
+get '/api/v1/user.old/:username.:format' => sub {
 	p(params->{username});
 	debug 'Are we here?';
 	my @raw = schema->resultset('User')->find({ 'username' => params->{'username'} });
 	p(@raw);
-	my $results = [map {
-		{ username => $_->username, password => $_->pass_hash }
-	} @raw];
+	my $results = [map { { id => $_->id, username => $_->username, password => $_->pass_hash } } @raw ];
 
 	p($results);
 	return $results;
 };
+
+prepare_serializer_for_format;
+
+prefix '/api/v1' => sub {
+  resource user =>
+    get    => sub {
+      #{ hello => 'world' };
+      # return user where id = params->{id}
+      my @raw = schema->
+        resultset('User')->
+        find(params->{id});
+      p(@raw);
+      my $results = [map {
+        { id => $_->id, username => $_->username, password => $_->pass_hash }
+      } grep {
+        defined $_
+      } @raw];
+
+      p($results);
+      return $results;
+    },
+    create => sub { 
+      # create a new user with params->{user}
+    },
+    delete => sub {
+      # delete user where id = params->{id}
+    },
+    update => sub {
+      # update user with params->{user}
+    };
+};
+
 
 # get '/api/v1/:api_key/protected' => require_logged_in sub {
 # 	return api_resp { you => 'got it' };

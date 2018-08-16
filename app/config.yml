@@ -67,6 +67,9 @@ plugins:
       password: h4ngl!gh7
       schema_class: App::Schema
 
+
+# @todo Dancer2::Session::DBIC
+
 engines:
   # session:
   #   MongoDB:
