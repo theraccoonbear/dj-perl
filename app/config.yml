@@ -68,6 +68,9 @@ plugins:
       schema_class: App::Schema
 
 
+serializers:
+  json: JSON
+
 # @todo Dancer2::Session::DBIC
 
 engines:

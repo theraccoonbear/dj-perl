@@ -28,4 +28,18 @@ __PACKAGE__->add_unique_constraint([qw( username )]);
 
 #__PACKAGE__->has_many('cds' => 'MyApp::Schema::Result::Cd', 'artistid');
 
+sub TO_JSON {
+	my $self = shift;
+  my @fields = qw(id username pass_hash);
+
+  return { map { $_ => $self->$_ } @fields };
+
+	# {
+	# 	username => $self->username,
+	# 	id => $self->id,
+  #   pass_hash => $self->pass_hash;
+	# }
+}
+
+
 1;

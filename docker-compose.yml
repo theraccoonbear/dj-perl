@@ -11,6 +11,7 @@ services:
       - APP_DB_PASSWORD=${APP_DB_PASSWORD}
       - APP_DB_HOST=${APP_DB_HOST}
       - APP_DB_PORT=${APP_DB_PORT}
+      - DANCER_ENVIRONMENT=development
     hostname: dj-perl
     container_name: 'dj-perl'
     ports:

@@ -13,6 +13,9 @@ use Data::Printer;
 # use App::Model::Follower;
 use Dancer2::Plugin::Flash;
 use Dancer2::Plugin::DBIC;
+
+use App::Route::API;
+
 our $VERSION = 0.1;
 
 # my $users = App::Model::User->instance();
@@ -25,7 +28,9 @@ get q{/} => sub {
 	p($users);
 };
 
-use App::Route::API;
+set serializer => 'JSON';
+
+App::Route::API->register();
 
 # get q{/} => sub {
 # 	# my $flw = $followers->followed_by(session 'username');

@@ -14,9 +14,16 @@ __PACKAGE__->add_columns(
   },
   username => {
     data_type => 'text',
+    is_nullable => 0
   },
   pass_hash => {
     data_type => 'text',
+    is_nullable => 0
+  },
+  light_status => {
+    data_type => 'text',
+    is_nullable => 0,
+    default_value => 'red'
   }
 );
 
