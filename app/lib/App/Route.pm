@@ -32,38 +32,6 @@ set serializer => 'JSON';
 
 App::Route::API->register();
 
-# get q{/} => sub {
-# 	# my $flw = $followers->followed_by(session 'username');
-# 	# p($flw);
-# 	# return template 'index', {
-# 	# 	followees => $flw
-# 	# };
-
-# 	redirect '/client/index.html'
-# };
-
-# hook before => sub {
-# 	my $username = session 'username';
-	
-# 	if (!$username && request->path_info !~ m{^/user/login}xsm) {
-# 		flash(error => 'you must login first');
-# 		redirect '/user/login';
-# 	}
-
-# 	var 'username' => $username;
-# 	var 'user' => $users->get_by_username($username);
-
-# 	say STDERR 'Processing request for: ' . request->path_info;
-# };
-
-
-# Load routes here
-
-# use App::Route::API::User;
-# use App::Route::API::Session;
-# use App::Route::API::Friend;
-# use App::Route::API;
-
 any qr{.*} => sub {
 	return send_file 'index.html';
 

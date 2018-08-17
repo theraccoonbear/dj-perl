@@ -33,12 +33,6 @@ sub TO_JSON {
   my @fields = qw(id username pass_hash);
 
   return { map { $_ => $self->$_ } @fields };
-
-	# {
-	# 	username => $self->username,
-	# 	id => $self->id,
-  #   pass_hash => $self->pass_hash;
-	# }
 }
 
 
