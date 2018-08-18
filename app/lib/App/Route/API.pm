@@ -3,7 +3,7 @@ package App::Route::API;
 
 use Dancer2 appname => $ENV{APP_NAME};
 use Data::Printer;
-use JSON;
+use JSON qw();
 
 sub register {
   use Dancer2::Plugin::DBIC;
