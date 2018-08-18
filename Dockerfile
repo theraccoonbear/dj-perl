@@ -10,7 +10,8 @@ RUN apk update && \
 
 RUN ./build/setup-perl-env.sh
 
-RUN apk del build-base gcc abuild binutils binutils-doc gcc-doc
+# @todo re-enable when done fiddling with new perl modules
+#RUN apk del build-base gcc abuild binutils binutils-doc gcc-doc
 
 EXPOSE 5000
 

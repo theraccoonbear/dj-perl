@@ -21,8 +21,8 @@ $schema->create_ddl_dir(['PostgreSQL'], '0.1', './dbscriptdir/');
 
 $schema->deploy();
 
-my @users = (['hanglighter', 'xxx'], ['another', 'zzz']);
-$schema->populate('User', [
-    [qw/username pass_hash/],
-    @users,
-]);
+# my @users = (['hanglighter', 'xxx'], ['another', 'zzz']);
+# $schema->populate('User', [
+#     [qw/username pass_hash/],
+#     @users,
+# ]);

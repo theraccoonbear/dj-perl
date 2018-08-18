@@ -21,33 +21,36 @@ our $VERSION = 0.1;
 # my $users = App::Model::User->instance();
 # my $followers = App::Model::Follower->instance();
 
-prefix undef;
-
-get q{/} => sub {
-	my $users = schema->resultset('User')->find({ 'username' => 'hanglighter' });
-	p($users);
-};
-
 set serializer => 'JSON';
 
-App::Route::API->register();
+sub register {
+  App::Route::API->register();
 
-any qr{.*} => sub {
-	return send_file 'index.html';
+  prefix undef;
 
-	status 'not_found';
+  get q{/} => sub {
+    my $users = schema->resultset('User')->find({ 'username' => 'hanglighter' });
+    p($users);
+  };
 
-	debug "Something went wrong: " . request->path_info;
 
-	my $params = {};
-	if (request->path_info =~ m{^/(?<model>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<action>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<id>[a-f0-9]{24}))?)?}xsm) {
-		#say STDERR "Were you trying to: " . $+{action} . ' to the ' . $+{id} . ' of ' . $+{model};
-		$params->{model} = $+{model};
-		$params->{action} = $+{action};
-		$params->{id} = $+{id};
-	}
+  any qr{.*} => sub {
+    return send_file 'index.html';
 
-	template 'err/404', $params;
-};
+    # status 'not_found';
+
+    # debug "Something went wrong: " . request->path_info;
+
+    # my $params = {};
+    # if (request->path_info =~ m{^/(?<model>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<action>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<id>[a-f0-9]{24}))?)?}xsm) {
+    #   #say STDERR "Were you trying to: " . $+{action} . ' to the ' . $+{id} . ' of ' . $+{model};
+    #   $params->{model} = $+{model};
+    #   $params->{action} = $+{action};
+    #   $params->{id} = $+{id};
+    # }
+
+    # template 'err/404', $params;
+  };
+}
 
 1;

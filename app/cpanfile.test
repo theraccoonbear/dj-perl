@@ -1,0 +1,2 @@
+# @todo lock these to real versions
+requires 'REST::Client', '>= 0.0001';

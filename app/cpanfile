@@ -37,6 +37,7 @@ requires 'Sys::RunAlone', '>= 0.0001';
 
 # DJ pg edition
 requires 'DBIx::Class', '>= 0.0001';
+requires 'DBIx::Class::Migration', '>= 0.0001';
 requires 'DBD::Pg', '>= 0.0001';
 requires 'SQL::Translator', '>= 0.0001';
 requires 'Dancer2::Plugin::DBIC', '>= 0.0001';

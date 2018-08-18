@@ -3,6 +3,7 @@ package App::Route::API;
 
 use Dancer2 appname => $ENV{APP_NAME};
 use Data::Printer;
+use JSON;
 
 sub register {
   use Dancer2::Plugin::DBIC;
@@ -16,6 +17,10 @@ sub register {
   };
 
   App::Route::API::User->register();
+
+  any qr{/api/v1/?.*} => sub {
+  	status_404 { error => JSON::true, message => "not found" };
+  };
 }
 
 1;

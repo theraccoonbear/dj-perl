@@ -7,6 +7,10 @@ use Dancer2::Plugin::REST;
 use Data::Printer;
 use Crypt::Bcrypt::Easy;
 
+use App::Model::User;
+
+my $user_m = App::Model::User->new();
+
 
 sub register {
   prefix '/api/v1' => sub {
@@ -30,17 +34,17 @@ sub get_user {
 }
 
 sub create_user {
-  my $must_have = ['username', 'password'];
-  my $missing = [grep { !defined body_parameters->get($_) } @{$must_have}];
-  if (scalar @{$missing}) {
-    return status_400 { missing => $missing };
-  }
-  p($missing);
+  my $user = $user_m->create(body_parameters);
+  # my $must_have = ['username', 'password'];
+  # my $missing = [grep { !defined body_parameters->get($_) } @{$must_have}];
+  # if (scalar @{$missing}) {
+  #   return status_400 { missing => $missing };
+  # }
 
-  my $user = schema->resultset('User')->create({
-    username => body_parameters->get('username'),
-    pass_hash => bcrypt->crypt(body_parameters->get('password'))
-  });
+  # my $user = schema->resultset('User')->create({
+  #   username => body_parameters->get('username'),
+  #   pass_hash => bcrypt->crypt(body_parameters->get('password'))
+  # });
 
   return status_created { status => 'ok', user => $user->TO_JSON };
 }

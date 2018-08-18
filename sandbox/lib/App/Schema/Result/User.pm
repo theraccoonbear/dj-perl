@@ -19,6 +19,10 @@ __PACKAGE__->add_columns(
   },
   pass_hash => {
     data_type => 'text',
+  },
+  light_status => {
+    data_type => 'text',
+    default_value => 'red'
   }
 );
 
