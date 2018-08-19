@@ -1,43 +1,56 @@
-# @todo lock these to real versions
-requires 'Getopt::Long', '>= 0.0001';
-requires 'Data::Dumper', '>= 0.0001';
-requires 'Data::Printer', '>= 0.0001';
-requires 'AnyEvent', '>= 0.0001';
-requires 'AnyEvent::HTTP', '>= 0.0001';
-requires 'Twiggy', '>= 0.0001';
-requires 'Twiggy::TLS', '>= 0.0001';
-requires 'IO::Socket::SSL', '>= 0.0001';
-requires 'Net::SSLeay', '>= 0.0001';
-requires 'JSON::XS', '>= 0.0001';
-requires 'YAML::XS', '>= 0.0001';
-requires 'File::Slurp', '>= 0.0001';
-requires 'HTML::Entities', '>= 0.0001';
-requires 'Plack', '>= 1.0043';
-requires 'Plack::App::WebSocket', '>= 0.0001';
-requires 'Plack::Middleware::FixMissingBodyInRedirect', '>= 0.0001';
-requires 'Plack::Middleware::CrossOrigin', '>= 0.0001';
-# requires 'Moo', '>= 0.0001';
-# requires 'Moose', '>= 0.0001';
-# requires 'MooseX::Singleton', '>= 0.0001';
-requires 'Params::ValidationCompiler', '>= 0.26';
-requires 'Date::Time', '>= 0.00000001';
-requires 'DateTime', '>= 0.00000001';
-requires 'DateTime::Duration', '>= 0.00000001';
-requires 'Date::Parse', '>= 0.0001';
-requires 'DateTimeX::TO_JSON', '>= 0.00000001';
-# requires 'MongoDB', '>= 0.0001';
-requires 'Dancer2', '>= 0.0001';
-requires 'Dancer2::Plugin::Flash', '>= 0.0001';
-# requires 'Dancer2::Session::MongoDB', '>= 0.0001';
-requires 'Template::Plugin::JSON', '>= 0.0001';
-requires 'Crypt::Bcrypt::Easy', '>= 0.0001';
-requires 'Crypt::Digest::SHA256', '>= 0.0001';
-requires 'Sys::RunAlone', '>= 0.0001';
+# This cpanfile was auto-generated
+requires 'AnyEvent', '>= 7.14'; # CPAN offers 7.14;
+requires 'AnyEvent::HTTP', '>= 2.23'; # CPAN offers 2.23;
 
-# DJ pg edition
-requires 'DBIx::Class', '>= 0.0001';
-requires 'DBIx::Class::Migration', '>= 0.0001';
-requires 'DBD::Pg', '>= 0.0001';
-requires 'SQL::Translator', '>= 0.0001';
-requires 'Dancer2::Plugin::DBIC', '>= 0.0001';
-requires 'Dancer2::Plugin::REST', '>= 0.0001';
+requires 'Crypt::Bcrypt::Easy', '>= 2.012002'; # CPAN offers 2.012002;
+requires 'Crypt::Digest::SHA256', '>= 0.061'; # CPAN offers 0.061;
+
+requires 'DBD::Pg', '>= 3.7.4'; # CPAN offers 3.7.4;
+
+requires 'DBIx::Class', '>= 0.082841'; # CPAN offers 0.082841;
+requires 'DBIx::Class::Migration', '>= 0.060'; # CPAN offers 0.060;
+
+requires 'Dancer2', '>= 0.206000'; # CPAN offers 0.206000;
+requires 'Dancer2::Plugin::DBIC', '>= 0.0100'; # CPAN offers 0.0100;
+requires 'Dancer2::Plugin::Flash', '>= 0.03'; # CPAN offers 0.03;
+requires 'Dancer2::Plugin::REST', '>= 1.02'; # CPAN offers 1.02;
+
+requires 'Data::Dumper', '>= 2.167'; # CPAN offers 2.161;
+requires 'Data::Printer', '>= 0.40'; # CPAN offers 0.40;
+
+requires 'Date::Parse', '>= 2.30'; # CPAN offers 2.30;
+
+requires 'DateTime', '>= 1.50'; # CPAN offers 1.50;
+requires 'DateTime::Duration', '>= 1.50'; # CPAN offers 1.50;
+
+requires 'DateTimeX::TO_JSON', '>= 0.0.2'; # CPAN offers 0.000002;
+
+requires 'File::Slurp', '>= 9999.19'; # CPAN offers 9999.19;
+
+requires 'Getopt::Long', '>= 2.49'; # CPAN offers 2.5;
+
+requires 'HTML::Entities', '>= 3.69'; # CPAN offers 3.69;
+
+requires 'IO::Socket::SSL', '>= 2.048'; # CPAN offers 2.059;
+
+requires 'JSON::XS', '>= 3.04'; # CPAN offers 3.04;
+
+requires 'Net::SSLeay', '>= 1.85'; # CPAN offers 1.85;
+
+requires 'Params::ValidationCompiler', '>= 0.30'; # CPAN offers 0.30;
+
+requires 'Plack', '>= 1.0047'; # CPAN offers 1.0047;
+requires 'Plack::App::WebSocket', '>= 0.08'; # CPAN offers 0.08;
+requires 'Plack::Middleware::CrossOrigin', '>= 0.012'; # CPAN offers 0.012;
+requires 'Plack::Middleware::FixMissingBodyInRedirect', '>= 0.12'; # CPAN offers 0.12;
+
+requires 'SQL::Translator', '>= 0.11024'; # CPAN offers 0.11024;
+
+requires 'Sys::RunAlone', '>= 0.13'; # CPAN offers 0.13;
+
+requires 'Template::Plugin::JSON', '>= 0.07'; # CPAN offers 0.07;
+
+requires 'Twiggy', '>= 0.1025'; # CPAN offers 0.1025;
+requires 'Twiggy::TLS', '>= 0.0019'; # CPAN offers 0.0019;
+
+requires 'YAML::XS', '>= 0.72'; # CPAN offers 0.72;

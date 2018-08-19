@@ -34,17 +34,15 @@ sub get_user {
 }
 
 sub create_user {
-  my $user = $user_m->create(body_parameters);
-  # my $must_have = ['username', 'password'];
-  # my $missing = [grep { !defined body_parameters->get($_) } @{$must_have}];
-  # if (scalar @{$missing}) {
-  #   return status_400 { missing => $missing };
-  # }
+  my $user;
 
-  # my $user = schema->resultset('User')->create({
-  #   username => body_parameters->get('username'),
-  #   pass_hash => bcrypt->crypt(body_parameters->get('password'))
-  # });
+  eval {
+    $user = $user_m->create(body_parameters);
+  };
+
+  if ($@) {
+    return status_400, { error => 1, message => $@ };
+  }
 
   return status_created { status => 'ok', user => $user->TO_JSON };
 }

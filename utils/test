@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cd app
+prove --lib -r -v t
+cd ..
+

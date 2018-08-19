@@ -52,3 +52,5 @@ map {
 } sort {
   $a->{mod_name} cmp $b->{mod_name}
 } @wanted_modules;
+
+`chown -R 1000:1000 /opt/src`

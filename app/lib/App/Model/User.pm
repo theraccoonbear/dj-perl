@@ -1,23 +1,34 @@
 package App::Model::User;
 
-use base qw(App::Model);
+use Moose;
+
+extends 'App::Model';
+
+use Crypt::Bcrypt::Easy;
 
 #use App::Schema:ResultSet::User;
 
-our $must_have = ['username', 'password'];
+#our $must_have = ['username', 'password'];
+
+has '+create_fields' => (
+  default => sub { ['username', 'password'] }
+);
+
+has '+model_name' => ( default => 'User' );
 
 sub create {
   my ($self, $params) = @_;
-  my $missing = [grep { !defined $params->{$_} } @{$must_have}];
+  my $missing = $self->missing_fields($params->{$_});
   if (scalar @{$missing}) {
-    #return status_400 { missing => $missing };
     warn 'missing: ' . join(', ', @{$missing});
   }
 
-  my $user = $self->schema->resultset('User')->create({
+  my $user = $self->schema->resultset($self->model_name)->create({
     username => $params->{'username'},
     pass_hash => bcrypt->crypt($params->{'password'})
   });
 
   return $user;
 }
+
+1;

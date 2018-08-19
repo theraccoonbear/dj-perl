@@ -19,8 +19,8 @@ my $schema = App::Schema->connect(
   { AutoCommit => 1, RaiseError => 1, PrintError => 0}
 );
 
-#$schema->create_ddl_dir(['PostgreSQL'], '0.1', './dbscriptdir/');
-#$schema->deploy();
+$schema->create_ddl_dir(['PostgreSQL'], '0.1', './dbscriptdir/');
+$schema->deploy();
 
 #my @users = (['hanglighter', 'xxx'], ['another', 'zzz']);
 my @users = map { {

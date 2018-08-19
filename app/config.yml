@@ -71,6 +71,8 @@ plugins:
 serializers:
   json: JSON
 
+serializer: JSON
+
 # @todo Dancer2::Session::DBIC
 
 engines:
