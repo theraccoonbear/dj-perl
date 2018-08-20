@@ -153,6 +153,15 @@ sub api_post {
   return $resp_data
 }
 
+sub api_delete {
+  my ($action, $expected) = @_;
+	
+	my $delete = HTTP::Request->new('DELETE', Test::Helper::endpoint($action));
+
+  my $resp_data = Test::Helper::api_request($delete, $expected);
+  return $resp_data
+}
+
 # sub env_key {
 # 	my ($name) = @_;
 # 	return $name;

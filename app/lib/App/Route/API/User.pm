@@ -17,9 +17,7 @@ sub register {
     resource user =>
       get => \&get_user,
       create => \&create_user,
-      delete => sub {
-        # delete user where id = params->{id}
-      },
+      delete => \&delete_user,
       update => sub {
         # update user with params->{user}
       };
@@ -45,6 +43,13 @@ sub create_user {
   }
 
   return status_created { status => 'ok', user => $user->TO_JSON };
+}
+
+sub delete_user {
+  my $user = schema->resultset('User')->find({ id => params->{id} });
+  $user->delete;
+
+  return status_accepted { status => 'ok' };
 }
 
 

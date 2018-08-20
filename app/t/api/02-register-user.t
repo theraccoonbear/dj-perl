@@ -16,10 +16,12 @@ my $new_user = {
 my $data;
 
 $data = Test::Helper::api_post('user', $new_user);
-p($data);
-cmp_ok($data->{username}, 'eq', $new_user->{username}, 'created new user');
+cmp_ok($data->{user}->{username}, 'eq', $new_user->{username}, 'created new user');
+my $created_user = $data->{user};
 
 $data = Test::Helper::api_post('user', $new_user, 400);
+
+$data = Test::Helper::api_delete('user/' . $created_user->{id});
 
 # ok($data->{hello}, "has hello key");
 # cmp_ok($data->{hello}, 'eq', 'World!', 'hello, world!');
