@@ -1,0 +1,26 @@
+image: gitlab/dind:latest
+
+services:
+- docker:dind
+
+stages:
+- build
+- deploy
+
+variables:
+  CONTAINER_RELEASE_IMAGE: gitlab.madisonhub.org:4567/theraccoonbear/dj-perl:$CI_BUILD_REF_NAME
+
+build:
+  stage: build
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.madisonhub.org:4567
+    - docker build -t $CONTAINER_RELEASE_IMAGE .
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+deploy:
+  stage: deploy
+  environment: $CI_BUILD_REF_NAME
+  stage: deploy
+  image: cdrx/rancher-gitlab-deploy
+  script:
+    - upgrade --rancher-url $RANCHER_URL --rancher-key $RANCHER_KEY --rancher-secret $RANCHER_SECRET --stack $CI_BUILD_REF_NAME --service dj-perl hanglight --environment theraccoonbear
