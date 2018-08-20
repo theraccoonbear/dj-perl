@@ -5,14 +5,13 @@ services:
       context: .
     image: 'theraccoonbear/dj-perl'
     environment:
-      - APP_NAME=hanglight
-      - DBNAME=double_jeopardy
-      - DBUSER=postgres
-      - DBPASS=qwerty1234
-      - DBHOST=postgres
-      - DBPORT=5432
-      - PGUSER=postgres
-      - PGPASS=qwerty1234
+      - APP_NAME=${APP_NAME}
+      - APP_DB_NAME=${APP_DB_NAME}
+      - APP_DB_USER=${APP_DB_USER}
+      - APP_DB_PASSWORD=${APP_DB_PASSWORD}
+      - APP_DB_HOST=${APP_DB_HOST}
+      - APP_DB_PORT=${APP_DB_PORT}
+      - DANCER_ENVIRONMENT=development
     hostname: dj-perl
     container_name: 'dj-perl'
     ports:
@@ -27,16 +26,19 @@ services:
 
   dj-postgres:
     environment:
-      - POSTGRES_DB=double_jeopardy
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=qwerty1234
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - APP_DB_NAME=${APP_DB_NAME}
+      - APP_DB_USER=${APP_DB_USER}
+      - APP_DB_PASSWORD=${APP_DB_PASSWORD}
     ports:
       - '5432:5432'
     image: 'postgres:latest'
     container_name: 'dj-postgres'
+    hostname: dj-postgres
     volumes:
       - './build/pg/postgres-init:/docker-entrypoint-initdb.d'
-      - './build/pg/scripts:/sql-scripts'
+      - './build/pg/sql-scripts:/sql-scripts'
     networks:
       - app
 

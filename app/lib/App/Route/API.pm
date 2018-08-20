@@ -1,33 +1,26 @@
-package App::API;
-
-use FindBin;
-use Cwd qw(abs_path);
-
-#use lib abs_path("$FindBin::Bin/../../../lib");
-#use lib abs_path("$FindBin::Bin/../../../modules/lib/perl5");
+package App::Route::API;
 
 
 use Dancer2 appname => $ENV{APP_NAME};
-use File::Slurp;
 use Data::Printer;
-use Data::Dumper;
-use YAML::XS;
-use File::Slurp;
-use Crypt::Bcrypt::Easy;
-use Digest::SHA qw(sha256_hex);
-use Dancer2::Plugin::API;
-use Dancer2::Plugin::Auth;
+use JSON qw();
 
-# @todo add in that whole API key yadda yadda ;)
+sub register {
+  use Dancer2::Plugin::DBIC;
+  use Dancer2::Plugin::REST;
+  use App::Route::API::User;
+  
+  prepare_serializer_for_format;
 
-get '/api/v1/:api_key/protected' => require_logged_in sub {
-	return api_resp { you => 'got it' };
-};
+  get '/api/v1/test' => sub {
+  	{ hello => 'World!' };
+  };
 
-post qr{/api.*}xsm => sub {
-	debug "DANGER WILL ROBINSON!";
-	status 'not_found';
-	return api_error { error => 'not found' }, 404;
-};
+  App::Route::API::User->register();
+
+  any qr{/api/v1/?.*} => sub {
+  	status_404 { error => JSON::true, message => "not found" };
+  };
+}
 
 1;

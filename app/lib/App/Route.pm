@@ -12,65 +12,45 @@ use Data::Printer;
 # use App::Model::User;
 # use App::Model::Follower;
 use Dancer2::Plugin::Flash;
+use Dancer2::Plugin::DBIC;
+
+use App::Route::API;
+
 our $VERSION = 0.1;
 
 # my $users = App::Model::User->instance();
 # my $followers = App::Model::Follower->instance();
 
-prefix undef;
+set serializer => 'JSON';
 
-# get q{/} => sub {
-# 	send_file 'index.html';
-# };
+sub register {
+  App::Route::API->register();
 
-# get q{/} => sub {
-# 	# my $flw = $followers->followed_by(session 'username');
-# 	# p($flw);
-# 	# return template 'index', {
-# 	# 	followees => $flw
-# 	# };
+  prefix undef;
 
-# 	redirect '/client/index.html'
-# };
-
-# hook before => sub {
-# 	my $username = session 'username';
-	
-# 	if (!$username && request->path_info !~ m{^/user/login}xsm) {
-# 		flash(error => 'you must login first');
-# 		redirect '/user/login';
-# 	}
-
-# 	var 'username' => $username;
-# 	var 'user' => $users->get_by_username($username);
-
-# 	say STDERR 'Processing request for: ' . request->path_info;
-# };
+  get q{/} => sub {
+    my $users = schema->resultset('User')->find({ 'username' => 'hanglighter' });
+    p($users);
+  };
 
 
-# Load routes here
+  any qr{.*} => sub {
+    return send_file 'index.html';
 
-# use App::Route::API::User;
-# use App::Route::API::Session;
-# use App::Route::API::Friend;
-# use App::Route::API;
+    # status 'not_found';
 
-any qr{.*} => sub {
-	return send_file 'index.html';
+    # debug "Something went wrong: " . request->path_info;
 
-  status 'not_found';
+    # my $params = {};
+    # if (request->path_info =~ m{^/(?<model>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<action>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<id>[a-f0-9]{24}))?)?}xsm) {
+    #   #say STDERR "Were you trying to: " . $+{action} . ' to the ' . $+{id} . ' of ' . $+{model};
+    #   $params->{model} = $+{model};
+    #   $params->{action} = $+{action};
+    #   $params->{id} = $+{id};
+    # }
 
-	debug "Something went wrong: " . request->path_info;
-
-	my $params = {};
-	if (request->path_info =~ m{^/(?<model>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<action>[a-z]+[a-zA-Z0-9_-]+)(?:/(?<id>[a-f0-9]{24}))?)?}xsm) {
-		#say STDERR "Were you trying to: " . $+{action} . ' to the ' . $+{id} . ' of ' . $+{model};
-		$params->{model} = $+{model};
-		$params->{action} = $+{action};
-		$params->{id} = $+{id};
-	}
-
-  template 'err/404', $params;
-};
+    # template 'err/404', $params;
+  };
+}
 
 1;

@@ -1,39 +1,34 @@
 package App::Model::User;
-use strict;
-use warnings;
 
-our $VERSION = 0.1;
-
-use MooseX::Singleton;
+use Moose;
 
 extends 'App::Model';
 
-use Data::Printer;
+use Crypt::Bcrypt::Easy;
 
-has '+model_name' => (default => 'users');
+#use App::Schema:ResultSet::User;
 
-has '+private_fields' => (
-	default => sub {
-		return {
-			'password' => 1
-		};
-	}
+#our $must_have = ['username', 'password'];
+
+has '+create_fields' => (
+  default => sub { ['username', 'password'] }
 );
 
-sub get_by_username {
-	my ($self, $username) = @_;
-	
-	my $user = [$self->collection->find({username => $username})->all()];
+has '+model_name' => ( default => 'User' );
 
-	return $user ? $user->[0] : undef;
-}
+sub create {
+  my ($self, $params) = @_;
+  my $missing = $self->missing_fields($params->{$_});
+  if (scalar @{$missing}) {
+    warn 'missing: ' . join(', ', @{$missing});
+  }
 
-sub user_exists {
-	my ($self, $username) = @_;
-	
-	my $user = [$self->collection->find({username => $username})->all()];
+  my $user = $self->schema->resultset($self->model_name)->create({
+    username => $params->{'username'},
+    pass_hash => bcrypt->crypt($params->{'password'})
+  });
 
-	return $user ? $user->[0] : undef;
+  return $user;
 }
 
 1;
